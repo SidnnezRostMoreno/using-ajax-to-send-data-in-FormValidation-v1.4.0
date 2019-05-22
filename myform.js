@@ -67,13 +67,10 @@ document.addEventListener('DOMContentLoaded', function(e) {
         }
     );
 
+    // How to call and revalidate the SelectPicker?
+    
 
-    const selectpicker = function() {
-        const realEstate = form.querySelector('[name="realEstate"]').value;
-
-        // Revalidate it
-        fv.revalidateField('realEstate');
-    };
+    // How to use Ajax to send form and display message through modal Bootstrap?
 
 
 });
