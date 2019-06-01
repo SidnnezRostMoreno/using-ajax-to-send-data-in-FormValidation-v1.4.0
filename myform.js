@@ -1,15 +1,19 @@
-document.addEventListener('DOMContentLoaded', function(e) {
+$(document).ready(function() {
 
-    const form  = document.getElementById('myForm');
-    const bS    = form.querySelector('[id="btnSubmit"]');
-    const sM    = form.querySelector('[id="submitModal"]');
-    const sml   = form.querySelector('[id="submitModalLabel"]');
-    const smp   = form.querySelector('[id="submitModalParagraph"]');
+    const form = document.getElementById('myForm');
+
+    var bS  = $('#btnSubmit'),
+        sM  = $('#submitModal'),
+        sml = $('#submitModalLabel'),
+        smp = $('#submitModalParagraph'),
+        mH  = $('#submitModal').find('.modal-header'),
+        mF  = $('#submitModal').find('.modal-footer'),
+        rE  = $('#myForm').attr('name', 'realEstate');
 
     const fv = FormValidation.formValidation (
         form, {
             fields: {
-                name: {
+                username: {
                     validators: {
                         notEmpty: {
                             message: 'The name is required.'
@@ -56,7 +60,6 @@ document.addEventListener('DOMContentLoaded', function(e) {
             plugins: {
                 trigger: new FormValidation.plugins.Trigger(),
                 submitButton: new FormValidation.plugins.SubmitButton(),
-                defaultSubmit: new FormValidation.plugins.DefaultSubmit(),
                 bootstrap: new FormValidation.plugins.Bootstrap(),
                 icon: new FormValidation.plugins.Icon({
                     valid: 'fa fa-check',
@@ -65,14 +68,52 @@ document.addEventListener('DOMContentLoaded', function(e) {
                 }),
             },
         }
-    );
+    ).on('core.form.valid', function() {
 
-    // How to call and revalidate the SelectPicker?
-    
-
-    // How to use Ajax to send form and display message through modal Bootstrap?
-
-
+        FormValidation.utils.fetch('/dist/php/send.php', {
+            method: 'POST',
+            params: {
+                username: form.querySelector('[name="username"]').value,
+                email: form.querySelector('[name="email"]').value,
+                phone: form.querySelector('[name="phone"]').value,
+                realEstate: form.querySelector('[name="realEstate"]').value
+            },
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+            }
+        })
+        .then((response) => {
+            if (response.result === 'success') {
+                sM.modal('show')
+                mH.css('background-color', 'palegreen')
+                mF.css('background-color', '#f9f9f9')
+                sml.removeClass('hellip-loading').addClass('success').text('Your data has been sent successfully !')
+                smp.text('We will get back to you shortly.')
+                setTimeout(function() {
+                    sM.modal('hide')
+                    sml.removeClass('success').addClass('hellip-loading');
+                }, 15000);
+                console.log(response);
+            } else {
+                sM.modal('show')
+                mH.css('background-color', 'tomato')
+                mF.css('background-color', '#f9f9f9')
+                sml.removeClass('hellip-loading').addClass('error').text('There was a problem with sending your data.')
+                smp.text('Please try again later.')
+                setTimeout(function() {
+                    sM.modal('hide')
+                    sml.removeClass('error').addClass('hellip-loading');
+                }, 15000);
+                console.log(response);
+            }
+        });
+    })
+    // Integrate with SelectPicker
+    rE.selectpicker()
+        .change(function(e) {
+            fv.revalidateField('realEstate');
+        });
 });
 
 
@@ -99,7 +140,7 @@ function id( el ){
 }
 
 window.onload = function(){
-    id('phone-input').onkeyup = function(){
+    id('user-phone').onkeyup = function(){
         mask( this, mtel );
     }
 }
