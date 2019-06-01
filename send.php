@@ -25,16 +25,16 @@
 
       http_response_code(200);
 
-      $response = array ( "result" => "success" );
+      $response = array ('result' => 'success');
 
       echo json_encode($response);
 
-    } else {
+   } else {
 
-      $response = array ( "result" => "error" );
+      $response = array ('result' => 'error');
 
       echo json_encode($response);
 
-    }
+   }
 
 ?>
