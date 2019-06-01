@@ -2,15 +2,6 @@
   margin-top: 40px;
 }
 
-#myForm .bootstrap-select>.dropdown-toggle {
-  border: 1px solid #ced4da;
-}
-
-#myForm .btn-link {
-  color: #495057;
-  ;
-}
-
 .fv-form-bootstrap4:not(.form-inline) label~.fv-control-feedback {
   top: 37px;
 }
@@ -30,13 +21,29 @@
 }
 
 .fv-plugins-bootstrap:not(.form-inline) label ~ .fv-plugins-icon {
-  /*right: 15px;*/
+  right: 15px;
   top: 37px;
 }
 
 #realEstate .fv-plugins-icon {
   right: 20px;
-  top: 32px;
+  top: 0;
+}
+
+#realEstate .btn-link {
+  color: #495057;
+}
+
+#realEstate .bootstrap-select>.dropdown-toggle {
+  border: 1px solid #ced4da;
+}
+
+#realEstate.has-danger .bootstrap-select>.dropdown-toggle {
+  border: 1px solid #dc3545;
+}
+
+#realEstate.has-success .bootstrap-select>.dropdown-toggle {
+  border: 1px solid #28a745;
 }
 
 .hellip-loading::after {
