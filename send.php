@@ -25,13 +25,13 @@
 
       http_response_code(200);
 
-      $response = array ('result' => 'success');
+      $response['result'] = 'success';
 
       echo json_encode($response);
 
    } else {
 
-      $response = array ('result' => 'error');
+      $response['result'] = 'error';
 
       echo json_encode($response);
 
