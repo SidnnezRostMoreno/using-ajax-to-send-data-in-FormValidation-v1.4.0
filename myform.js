@@ -1,14 +1,14 @@
 $(document).ready(function() {
 
     const form = document.getElementById('myForm');
+    const rE   = $(form.querySelector('[name="realEstate]'));
 
     var bS  = $('#btnSubmit'),
         sM  = $('#submitModal'),
         sml = $('#submitModalLabel'),
         smp = $('#submitModalParagraph'),
         mH  = $('#submitModal').find('.modal-header'),
-        mF  = $('#submitModal').find('.modal-footer'),
-        rE  = $('#myForm').attr('name', 'realEstate');
+        mF  = $('#submitModal').find('.modal-footer');
 
     const fv = FormValidation.formValidation (
         form, {
