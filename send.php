@@ -23,8 +23,6 @@
 
   if($mail->Send()) {
 
-      http_response_code(200);
-
       $response['result'] = 'success';
 
       echo json_encode($response);
