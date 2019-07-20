@@ -14,9 +14,9 @@
 
   $realEstate = strip_tags(trim($_POST['realEstate']));
 
-  require_once('PHPMailer/PHPMailerAutoload.php');
+  require '../vendor/autoload.php';
 
-  $mail = new PHPMailer();
+  $mail = new PHPMailer;
 
   // Add your settings ...
   // See more at: https://github.com/PHPMailer/PHPMailer
